@@ -1,13 +1,17 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
+//var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//页面访问
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var login = require('./routes/login');
+
+//接口
+var serve_login = require('./serve/login');
 
 var app = express();
 
@@ -23,9 +27,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//页面
 app.use('/', routes);
 app.use('/users', users);
 app.use('/login',login);
+
+//接口
+app.use('./serve_login',serve_login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,10 @@
+.login{
+  margin-top: 15%; 
+}
+.login_area{
+  background-color: #FAFAFC;
+}
+.login_tip{
+  color:red;
+  opacity:0;
+}
