@@ -2,37 +2,38 @@
 var query = require('../dao/query.js');
 
 //检查登录
-function checkLogin(req,res,next){
-  if(!req.session.user){
-    console.log("未登录");
-    res.redirect('/login');
-  }
-  next();
+function checkLogin(req, res, next) {
+    if (!req.session.user) {
+        console.log("未登录");
+        res.redirect('/login');
+    }
+    next();
 }
 
-function checkNotLogin(req,res,next){
-  if(req.session.user){
-    console.log("已登录")
-    res.redirect('/home');
-  }
-  next();
+function checkNotLogin(req, res, next) {
+    if (req.session.user) {
+        console.log("已登录")
+        res.redirect('/home');
+    }
+    next();
 }
 
 //路由套路
 module.exports = function(app) {
 
-    app.get('/',checkLogin);
-    app.get('/',checkNotLogin);
+    //登入主页检查登录,已登录跳转home,未登录跳转login
+    app.get('/', checkLogin);
+    app.get('/', checkNotLogin);
 
 
-    app.get('/login',checkNotLogin)
+    app.get('/login', checkNotLogin)
     app.get('/login', function(req, res) {
         res.render('login', {
             title: "请登录"
         })
     })
 
-    app.post('/login',checkNotLogin);
+    app.post('/login', checkNotLogin);
     app.post('/login', function(req, res) {
         var name = req.body.name;
         var pwd = req.body.password;
@@ -56,17 +57,49 @@ module.exports = function(app) {
                 } else {
                     req.session.user = rows[0].name;
                     res.send({
-                      error:0,
-                      msg:"登录成功"
+                        error: 0,
+                        msg: "登录成功"
                     })
                 }
             }
         })
     })
 
-    app.get('/home',checkLogin);
-    app.get('/home',function(req,res){
-      console.log(req.session)
-      res.render('home',{title:"主页"})
+    app.get('/home', checkLogin);
+    app.get('/home', function(req, res) {
+        console.log(req.session)
+        res.render('home', {
+            title: "主页",
+            user: req.session.user
+        })
+    })
+
+    app.get("/logout", function(req, res) {
+        req.session.user = null;
+        res.send("success")
+    })
+
+    //  app.get('/userlist',checkLogin);
+    app.get('/userlist', function(req, res,next) {
+        res.render('userlist', {
+            title: "用户列表",
+            user: req.session.user
+        })
+    })
+
+    app.get("/list", function(req, res) {
+        //res.send("success")
+        query("select * from userlist",function(err,row){
+          if(err) throw err;
+          res.send(row)
+        })
+    })
+
+    //  app.get('/adduser',checkLogin);
+    app.get('/adduser', function(req, res) {
+        res.render('adduser', {
+            title: "新增用户",
+            user: req.session.user
+        })
     })
 }

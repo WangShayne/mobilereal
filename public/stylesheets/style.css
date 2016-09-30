@@ -6,3 +6,46 @@ body {
 a {
   color: #00B7FF;
 }
+
+.login{
+  margin-top: 15%;
+}
+.login_area{
+  background-color: #FAFAFC;
+}
+.login_tip1{
+  color:#999999;
+  font-siza:12px;
+}
+.login_tip2{
+  color:red;
+  display:none;
+}
+
+
+nav {
+    margin-top: 20px;
+}
+
+#quit {
+    margin-top: 4%;
+}
+
+.panel {
+    padding: 0;
+    background-color: #f8f8f8;
+
+}
+
+#userlist {
+    display: block;
+    margin-left: 50%;
+    margin-top:5%;
+}
+
+#adduser {
+    display: block;
+      margin-left: 50%;
+      margin-top:5%;
+      margin-bottom:5%;
+}
