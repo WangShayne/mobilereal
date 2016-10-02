@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel='stylesheet' href='/stylesheets/bootstrap.min.css' /></link>
-    <link rel='stylesheet' href='/stylesheets/jquery.dataTables.min.css' /></link>
+    <link rel='stylesheet' href='/stylesheets/bootstrap-table.min.css' /></link>
     <link rel='stylesheet' href='/stylesheets/style.css' /></link>
     <title>
         <%= title%>
@@ -31,23 +31,72 @@
     </nav>
 
     <div class="container panel">
-      <div id="list">
-        <table id="example" class="display" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>cname</th>
-                <th>phone</th>
-            </tr>
-        </thead>
+        <table id="list">
 
-    </table>
-      </div>
+        </table>
     </div>
 
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title" id="modal-title">用户信息修改</h4>
+                </div>
+                <!--/*modal-header*/-->
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-2 control-label">用户id</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="id" value="" readonly>
+                                <span id="add_name">用户名不能为空</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firstname" class="col-sm-2 control-label">用户名</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="name" value="">
+                                <span id="add_name">用户名不能为空</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastname" class="col-sm-2 control-label">公司名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="cname" value="">
+                                <span id="add_cname">公司名称不能为空</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname" class="col-sm-2 control-label">联系电话</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="phone" value="">
+                                <span id="add_phone">联系电话不能为空</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-default" id="edit">修改</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!--/*modal-body*/-->
+
+
+            </div>
+            <!--/*modal-dialog*/-->
+        </div>
+        <!--/*modal-content*/-->
+    </div>
+
+
     <script src="/javascripts/jquery.min.js"></script>
-    <script src="/javascripts/jquery.dataTables.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/bootstrap-table.min.js"></script>
+    <script src="/javascripts/bootstrap-table-zh-CN.min.js"></script>
     <script src="/src/userlist/userlist.js"></script>
 </body>
 

@@ -79,8 +79,8 @@ module.exports = function(app) {
         res.send("success")
     })
 
-    //  app.get('/userlist',checkLogin);
-    app.get('/userlist', function(req, res,next) {
+   app.get('/userlist',checkLogin);
+    app.get('/userlist', function(req, res, next) {
         res.render('userlist', {
             title: "用户列表",
             user: req.session.user
@@ -89,17 +89,56 @@ module.exports = function(app) {
 
     app.get("/list", function(req, res) {
         //res.send("success")
-        query("select * from userlist",function(err,row){
-          if(err) throw err;
-          res.send(row)
+        query("select * from userlist", function(err, row) {
+            if (err) throw err;
+            res.send(row)
         })
     })
 
-    //  app.get('/adduser',checkLogin);
+    app.get('/adduser', checkLogin);
     app.get('/adduser', function(req, res) {
         res.render('adduser', {
             title: "新增用户",
             user: req.session.user
         })
+    })
+
+
+    
+    app.post('/adduser', function(req, res) {
+        console.log(req.body)
+        var n = req.body.name;
+        var c = req.body.cname;
+        var p = req.body.phone;
+        var sql = "insert into userlist(name,cname,phone) values('" + n + "', '" + c + "', '" + p + "')";
+        query(sql, function(err, row) {
+            if (err) throw err;
+            res.send({
+                error: "0",
+                msg: row
+            });
+        })
+    })
+
+    app.post('/edit', function(req, res) {
+        var i = req.body.id;
+        var n = req.body.name;
+        var c = req.body.cname;
+        var p = req.body.phone;
+        var sql = "update userlist set name='" + n + "',cname='" + c + "',phone='" + p + "' where id='" + i + "'";
+          console.log(sql)
+      query(sql, function(err, row) {
+            if (err) throw err;
+            res.send(row)
+        })
+    })
+
+    app.post("/del",function(req,res){
+      var id = req.body.id;
+      var sql = "DELETE FROM userlist WHERE id = '"+id+ " ' ";
+      query(sql,function(err,row){
+        if(err) throw err;
+        res.send(row)
+      })
     })
 }

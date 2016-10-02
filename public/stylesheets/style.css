@@ -49,3 +49,8 @@ nav {
       margin-top:5%;
       margin-bottom:5%;
 }
+
+#add_name,#add_cname,#add_phone{
+  opacity: 0;
+  color:red;
+}
